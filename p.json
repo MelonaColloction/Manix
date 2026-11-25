@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "name": "MANIX Programming Knowledge",
+    "version": "1.0",
+    "note": "پایگاه دانش نمونه و قابل توسعه؛ نه تمام دانش برنامه‌نویسی جهان."
+  },
+  "topics": [
+    {
+      "title": "HTML",
+      "keywords": [
+        "html",
+        "ساختار سایت",
+        "تگ",
+        "فرم"
+      ],
+      "summary": "HTML ساختار معنایی صفحات وب را می‌سازد.",
+      "rules": [
+        "از header, nav, main, section, footer برای ساختار معنایی استفاده کن.",
+        "برای تصاویر alt و برای ورودی‌ها label قرار بده.",
+        "برای موبایل meta viewport ضروری است."
+      ],
+      "example": "<!doctype html>\n<html lang=\"fa\" dir=\"rtl\">\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>سایت من</title></head>\n<body><main><h1>سلام دنیا</h1></main></body></html>"
+    },
+    {
+      "title": "CSS",
+      "keywords": [
+        "css",
+        "ظاهر",
+        "استایل",
+        "responsive",
+        "ریسپانسیو",
+        "flex",
+        "grid"
+      ],
+      "summary": "CSS ظاهر، رنگ، فاصله و چیدمان را کنترل می‌کند.",
+      "rules": [
+        "برای چیدمان از Flexbox و Grid استفاده کن.",
+        "طراحی را mobile-first انجام بده.",
+        "رنگ‌ها و فاصله‌ها را با CSS variables مدیریت کن.",
+        "حالت focus و کنتراست مناسب را رعایت کن."
+      ],
+      "example": ":root{--bg:#0b1020;--surface:#151d31;--accent:#8b5cf6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:white;font-family:system-ui}.container{width:min(100% - 32px,1100px);margin:auto}"
+    },
+    {
+      "title": "JavaScript",
+      "keywords": [
+        "javascript",
+        "js",
+        "جاوااسکریپت",
+        "تابع",
+        "آرایه",
+        "async"
+      ],
+      "summary": "زبان اصلی تعامل در مرورگر و همچنین Node.js است.",
+      "rules": [
+        "برای متغیرهای جدید const و let استفاده کن.",
+        "برای کار ناهمگام async/await مناسب است.",
+        "ورودی‌ها را اعتبارسنجی کن.",
+        "برای متن کاربر از textContent استفاده کن تا خطر XSS کمتر شود."
+      ],
+      "example": "async function getData(){\n try {\n  const r=await fetch('/api/data');\n  if(!r.ok) throw new Error('Request failed');\n  return await r.json();\n } catch(e){ console.error(e); return null; }\n}"
+    },
+    {
+      "title": "Python",
+      "keywords": [
+        "python",
+        "پایتون",
+        "اسکریپت",
+        "فلاسک",
+        "جنگو"
+      ],
+      "summary": "زبان عمومی برای اتوماسیون، وب و پردازش داده.",
+      "rules": [
+        "برای هر پروژه محیط مجازی venv بساز.",
+        "وابستگی‌ها را در requirements.txt ثبت کن.",
+        "خطاهای فایل و شبکه را مدیریت کن.",
+        "توابع کوچک و قابل تست بنویس."
+      ],
+      "example": "from pathlib import Path\n\ndef read_text(path: str) -> str:\n    p = Path(path)\n    if not p.is_file():\n        raise FileNotFoundError(path)\n    return p.read_text(encoding='utf-8')"
+    },
+    {
+      "title": "React",
+      "keywords": [
+        "react",
+        "ری اکت",
+        "کامپوننت",
+        "jsx",
+        "state"
+      ],
+      "summary": "کتابخانه ساخت رابط کاربری کامپوننت‌محور.",
+      "rules": [
+        "کامپوننت‌ها را کوچک نگه دار.",
+        "برای state از useState استفاده کن.",
+        "برای آیتم‌های لیست key پایدار بده.",
+        "اثرها را فقط برای همگام‌سازی بیرونی استفاده کن."
+      ],
+      "example": "import {useState} from 'react';\nexport default function Counter(){\n const [n,setN]=useState(0);\n return <button onClick={()=>setN(x=>x+1)}>تعداد: {n}</button>;\n}"
+    },
+    {
+      "title": "Node.js و Express",
+      "keywords": [
+        "node",
+        "nodejs",
+        "express",
+        "بک اند",
+        "backend",
+        "سرور"
+      ],
+      "summary": "ساخت سرور و API با JavaScript.",
+      "rules": [
+        "secretها را در environment نگه دار.",
+        "ورودی درخواست را اعتبارسنجی کن.",
+        "خطاها را با middleware مرکزی مدیریت کن.",
+        "CORS را محدود و rate limit را برای مسیرهای حساس فعال کن."
+      ],
+      "example": "import express from 'express';\nconst app=express();\napp.use(express.json({limit:'100kb'}));\napp.get('/api/health',(req,res)=>res.json({ok:true}));\napp.listen(3000);"
+    },
+    {
+      "title": "SQL و دیتابیس",
+      "keywords": [
+        "sql",
+        "database",
+        "دیتابیس",
+        "پایگاه داده",
+        "جدول",
+        "رابطه"
+      ],
+      "summary": "SQL برای ساختاردهی و پرس‌وجوی داده رابطه‌ای است.",
+      "rules": [
+        "هر جدول کلید اصلی داشته باشد.",
+        "ارتباط‌ها را با foreign key تعریف کن.",
+        "برای ستون‌های پرتکرار index بساز.",
+        "از query پارامتری استفاده کن؛ رشته‌سازی SQL خطرناک است.",
+        "تغییرات schema را با migration مدیریت کن."
+      ],
+      "example": "CREATE TABLE users(id INTEGER PRIMARY KEY,email TEXT NOT NULL UNIQUE,password_hash TEXT NOT NULL);\nSELECT id,email FROM users WHERE email = ?;"
+    },
+    {
+      "title": "REST API",
+      "keywords": [
+        "api",
+        "rest",
+        "endpoint",
+        "http",
+        "درخواست",
+        "پاسخ"
+      ],
+      "summary": "قرارداد ارتباط بین کلاینت و سرور.",
+      "rules": [
+        "GET خواندن، POST ایجاد، PUT/PATCH تغییر و DELETE حذف است.",
+        "کد وضعیت درست برگردان: 200، 201، 400، 401، 403، 404، 500.",
+        "ساختار پاسخ را یکدست نگه دار.",
+        "احراز هویت با مجوزدهی متفاوت است."
+      ],
+      "example": "res.status(201).json({data:newRecord});\nres.status(400).json({error:{code:'INVALID_INPUT'}});"
+    },
+    {
+      "title": "امنیت ورود و ثبت‌نام",
+      "keywords": [
+        "login",
+        "register",
+        "auth",
+        "ورود",
+        "ثبت نام",
+        "رمز عبور",
+        "احراز هویت"
+      ],
+      "summary": "احراز هویت امن نیازمند هش رمز و مدیریت امن نشست است.",
+      "rules": [
+        "رمز عبور را متن ساده ذخیره نکن.",
+        "از Argon2id یا bcrypt استفاده کن؛ SHA-256 ساده برای password مناسب نیست.",
+        "کوکی نشست را HttpOnly و Secure و SameSite تنظیم کن.",
+        "rate limiting و بررسی مجوز سمت سرور لازم است."
+      ],
+      "example": "// Node.js with argon2\nconst hash=await argon2.hash(password);\nconst valid=await argon2.verify(hash,submittedPassword);"
+    },
+    {
+      "title": "رمزنگاری AES و SHA",
+      "keywords": [
+        "aes",
+        "aes256",
+        "aes-256",
+        "sha256",
+        "sha-256",
+        "encryption",
+        "hash",
+        "رمزنگاری",
+        "هش"
+      ],
+      "summary": "رمزنگاری برگشت‌پذیر با هش یک‌طرفه فرق دارد.",
+      "rules": [
+        "AES-GCM رمزنگاری احرازاصالت‌شده است؛ nonce را با یک کلید تکرار نکن.",
+        "SHA-256 هش است و رمزگشایی نمی‌شود.",
+        "برای password از Argon2id یا bcrypt استفاده کن.",
+        "کلید محرمانه را داخل کد عمومی یا مرورگر قرار نده."
+      ],
+      "example": "const key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt','decrypt']);\nconst iv=crypto.getRandomValues(new Uint8Array(12));\nconst data=new TextEncoder().encode('secret');\nconst encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,data);"
+    },
+    {
+      "title": "Git و GitHub",
+      "keywords": [
+        "git",
+        "github",
+        "گیت",
+        "گیت هاب",
+        "commit",
+        "branch",
+        "deploy"
+      ],
+      "summary": "Git تاریخچه کد را نگه می‌دارد و GitHub مخزن آنلاین میزبانی می‌کند.",
+      "rules": [
+        "تغییرهای منطقی را commit جداگانه کن.",
+        "برای ویژگی جدید branch بساز.",
+        "فایل .env و secret را push نکن.",
+        "GitHub Pages فقط محتوای استاتیک را اجرا می‌کند؛ backend و مدل AI را اجرا نمی‌کند."
+      ],
+      "example": "git init\ngit add .\ngit commit -m 'Initial commit'\ngit branch -M main\ngit remote add origin https://github.com/USER/REPO.git\ngit push -u origin main"
+    },
+    {
+      "title": "اپلیکیشن اندروید",
+      "keywords": [
+        "android",
+        "اندروید",
+        "اپلیکیشن",
+        "apk",
+        "kotlin",
+        "capacitor"
+      ],
+      "summary": "برای اپ بومی از Kotlin و برای بسته‌بندی وب‌اپ از Capacitor می‌توان استفاده کرد.",
+      "rules": [
+        "Kotlin انتخاب اصلی مدرن برای اپ بومی اندروید است.",
+        "Capacitor وب‌اپ را در پوسته اپ موبایل قرار می‌دهد.",
+        "مجوزها را حداقلی نگه دار.",
+        "برای انتشار APK/AAB باید فرایند امضا انجام شود."
+      ]
+    },
+    {
+      "title": "تست و خطایابی",
+      "keywords": [
+        "test",
+        "testing",
+        "debug",
+        "خطا",
+        "تست",
+        "دیباگ",
+        "ارور"
+      ],
+      "summary": "تست از بازگشت خطا جلوگیری می‌کند.",
+      "rules": [
+        "برای منطق مستقل unit test بنویس.",
+        "مسیرهای اصلی را integration test کن.",
+        "خطا را بازتولید و علت ریشه‌ای را پیدا کن.",
+        "حالت‌های مرزی و ورودی نامعتبر را تست کن."
+      ]
+    },
+    {
+      "title": "PWA و وب‌اپ نصب‌شونده",
+      "keywords": [
+        "pwa",
+        "وب اپ",
+        "نصب سایت",
+        "service worker",
+        "manifest"
+      ],
+      "summary": "PWA برخی قابلیت‌های نصب و آفلاین را به وب‌اپ می‌دهد.",
+      "rules": [
+        "manifest شامل name و icons و display است.",
+        "service worker معمولاً به HTTPS یا localhost نیاز دارد.",
+        "کش را نسخه‌بندی کن.",
+        "PWA جایگزین کامل اپ بومی نیست."
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "title": "وب‌سایت پایه",
+      "keywords": [
+        "ساخت سایت",
+        "سایت بساز",
+        "وب سایت بساز",
+        "landing page"
+      ],
+      "files": [
+        {
+          "name": "index.html",
+          "content": "<!doctype html>\n<html lang=\"fa\" dir=\"rtl\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>وب‌سایت من</title><link rel=\"stylesheet\" href=\"style.css\"></head><body><header><h1>به سایت من خوش آمدید</h1></header><main class=\"card\"><h2>شروع کنید</h2><p>پروژه واکنش‌گرا</p><button id=\"go\">کلیک کن</button></main><script src=\"app.js\"></script></body></html>"
+        },
+        {
+          "name": "style.css",
+          "content": ":root{font-family:system-ui;background:#0b1020;color:#fff}*{box-sizing:border-box}body{margin:0;padding:24px}header,main{width:min(100%,900px);margin:20px auto}.card{padding:24px;background:#151d31;border:1px solid #39445f;border-radius:18px}button{padding:12px 18px;border:0;border-radius:10px;background:#8b5cf6;color:white}"
+        },
+        {
+          "name": "app.js",
+          "content": "document.querySelector('#go').addEventListener('click',()=>alert('سلام!'));"
+        },
+        {
+          "name": "README.md",
+          "content": "# وب‌سایت من\nفایل index.html را در مرورگر باز کنید. برای انتشار استاتیک می‌توانید از GitHub Pages استفاده کنید."
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "title": "مراحل خطایابی",
+      "keywords": [
+        "رفع خطا",
+        "debug",
+        "ارور",
+        "مشکل کد"
+      ],
+      "steps": [
+        "متن کامل خطا و stack trace را بخوان.",
+        "خطا را به فایل و خط مشخص وصل کن.",
+        "ورودی‌ها و وضعیت پیش از خطا را بررسی کن.",
+        "یک نمونه حداقلی برای بازتولید بساز.",
+        "کمترین اصلاح امن را انجام بده.",
+        "تست‌های قبلی و حالت‌های مرزی را اجرا کن."
+      ]
+    }
+  ]
+    }
