@@ -6,10 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f0f13">
 <title>Mani AI</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root{
+:root {
   --bg:#0f0f13;
   --surface:#1a1a22;
   --surface2:#242430;
@@ -19,188 +20,356 @@
   --muted:#9a9aab;
   --border:rgba(255,255,255,.07);
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+body {
   font-family:Vazirmatn,sans-serif;
-  background:#050508;color:var(--text);
-  min-height:100dvh;display:flex;justify-content:center;
-  align-items:center;overflow:hidden
+  background:#050508;
+  color:var(--text);
+  min-height:100dvh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
-.phone{
-  width:100%;max-width:500px;height:100dvh;max-height:950px;
-  background:var(--bg);display:flex;flex-direction:column;overflow:hidden
+.phone {
+  width:100%;
+  max-width:500px;
+  height:100dvh;
+  max-height:950px;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
-.header{
-  padding:14px 16px;display:flex;align-items:center;gap:12px;
+.header {
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
   background:linear-gradient(180deg,#1a1a24,#121218);
-  border-bottom:1px solid var(--border);flex-shrink:0
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
 }
-.avatar{
-  width:45px;height:45px;border-radius:50%;
+.avatar {
+  width:45px;
+  height:45px;
+  border-radius:50%;
   background:linear-gradient(135deg,#7c5cff,#00d4aa);
-  display:grid;place-items:center;font-size:23px;
-  box-shadow:0 0 20px rgba(124,92,255,.3)
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  box-shadow:0 0 20px rgba(124,92,255,.3);
 }
-.header-info{flex:1}
-.header-info h1{font-size:17px;font-weight:700}
-.header-info p{font-size:12px;color:var(--accent)}
-.status{
-  display:inline-block;width:7px;height:7px;background:var(--accent);
-  border-radius:50%;margin-left:5px
+.header-info {flex:1}
+.header-info h1 {font-size:17px;font-weight:700}
+.header-info p {font-size:12px;color:var(--accent)}
+.status {
+  display:inline-block;
+  width:7px;
+  height:7px;
+  background:var(--accent);
+  border-radius:50%;
+  margin-left:5px;
 }
-.messages{
-  flex:1;overflow-y:auto;padding:17px 14px;
-  display:flex;flex-direction:column;gap:13px;
+.messages {
+  flex:1;
+  overflow-y:auto;
+  padding:17px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:13px;
   background:radial-gradient(ellipse at top,rgba(124,92,255,.06),transparent 50%),var(--bg);
-  scroll-behavior:smooth
+  scroll-behavior:smooth;
 }
-.msg{
-  max-width:95%;padding:11px 14px;border-radius:18px;
-  font-size:14px;line-height:1.85;overflow-wrap:anywhere;
-  animation:fade .2s ease
+.msg {
+  max-width:95%;
+  padding:11px 14px;
+  border-radius:18px;
+  font-size:14px;
+  line-height:1.85;
+  overflow-wrap:anywhere;
+  animation:fade .2s ease;
 }
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.user{
-  align-self:flex-start;background:linear-gradient(135deg,#7c5cff,#5b3fd4);
-  border-bottom-right-radius:5px;white-space:pre-wrap
+@keyframes fade {
+  from {opacity:0;transform:translateY(6px)}
+  to {opacity:1;transform:translateY(0)}
 }
-.bot{
-  align-self:flex-end;width:100%;max-width:100%;
-  background:#242430;border:1px solid var(--border);
-  border-bottom-left-radius:5px;white-space:normal
+.user {
+  align-self:flex-start;
+  background:linear-gradient(135deg,#7c5cff,#5b3fd4);
+  border-bottom-right-radius:5px;
+  white-space:pre-wrap;
 }
-.label{
-  display:block;font-size:11px;color:#a78bfa;
-  margin-bottom:7px;font-weight:600
+.bot {
+  align-self:flex-end;
+  width:100%;
+  max-width:100%;
+  background:#242430;
+  border:1px solid var(--border);
+  border-bottom-left-radius:5px;
+  white-space:normal;
 }
-.error{
-  align-self:center;max-width:95%;
+.label {
+  display:block;
+  font-size:11px;
+  color:#a78bfa;
+  margin-bottom:7px;
+  font-weight:600;
+}
+.error {
+  align-self:center;
+  max-width:95%;
   background:rgba(255,92,122,.12);
   border:1px solid rgba(255,92,122,.3);
-  color:#ff8a9e;text-align:center;font-size:13px
+  color:#ff8a9e;
+  text-align:center;
+  font-size:13px;
 }
-.welcome{text-align:center;margin:auto;padding:25px 15px;color:var(--muted)}
-.welcome .icon{font-size:48px;color:var(--primary)}
-.welcome h2{font-size:20px;color:white;margin:10px 0}
-.welcome p{font-size:13px;line-height:1.9}
-.typing{
-  display:none;padding:9px 18px;color:var(--muted);
-  font-size:12px;flex-shrink:0
+.welcome {
+  text-align:center;
+  margin:auto;
+  padding:25px 15px;
+  color:var(--muted);
 }
-.typing.active{display:block}
-.typing-dot{
-  display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:var(--accent);margin-left:4px;
-  animation:pulse .8s infinite alternate
+.welcome .icon {font-size:48px;color:var(--primary)}
+.welcome h2 {font-size:20px;color:white;margin:10px 0}
+.welcome p {font-size:13px;line-height:1.9}
+.typing {
+  display:none;
+  padding:9px 18px;
+  color:var(--muted);
+  font-size:12px;
+  flex-shrink:0;
 }
-@keyframes pulse{to{opacity:.25;transform:translateY(-3px)}}
+.typing.active {display:block}
+.typing-dot {
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  margin-left:4px;
+  animation:pulse .8s infinite alternate;
+}
+@keyframes pulse {
+  to {opacity:.25;transform:translateY(-3px)}
+}
 
-/* Code blocks */
-.code-box{
-  direction:ltr;text-align:left;margin:12px 0;
-  background:#101017;border:1px solid #393747;
-  border-radius:12px;overflow:hidden;max-width:100%
+/* Code */
+.code-box {
+  direction:ltr;
+  text-align:left;
+  margin:12px 0;
+  background:#101017;
+  border:1px solid #393747;
+  border-radius:12px;
+  overflow:hidden;
+  max-width:100%;
 }
-.code-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 11px;background:#191923;border-bottom:1px solid var(--border);
-  gap:8px
+.code-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 11px;
+  background:#191923;
+  border-bottom:1px solid var(--border);
+  gap:8px;
 }
-.code-lang{color:#b9a9ff;font-size:11px;font-family:monospace}
-.code-actions{display:flex;gap:6px;flex-wrap:wrap}
-.code-btn{
-  border:1px solid #444052;background:#292735;color:#eee;
-  border-radius:7px;padding:5px 9px;font-size:11px;
-  font-family:Vazirmatn,sans-serif;cursor:pointer
+.code-lang {
+  color:#b9a9ff;
+  font-size:11px;
+  font-family:monospace;
 }
-.code-btn.run{background:#145c4d;border-color:#187d68;color:#a7ffe7}
-.code-btn:active{opacity:.7}
-.code-box pre{
-  padding:13px;overflow-x:auto;white-space:pre;
-  font:12px/1.8 "Fira Code",monospace;color:#e4ddff;
-  scrollbar-width:thin
+.code-actions {display:flex;gap:6px;flex-wrap:wrap}
+.code-btn {
+  border:1px solid #444052;
+  background:#292735;
+  color:#eee;
+  border-radius:7px;
+  padding:5px 9px;
+  font-size:11px;
+  font-family:Vazirmatn,sans-serif;
+  cursor:pointer;
 }
-.code-box code{font-family:inherit}
-.bot-text{white-space:pre-wrap;overflow-wrap:anywhere}
-.bot-text p{margin:5px 0}
-.bot-text strong{color:#d7c9ff}
-.bot-text ul{padding-right:20px}
-.bot-text a{color:#a78bfa}
+.code-btn.run {
+  background:#145c4d;
+  border-color:#187d68;
+  color:#a7ffe7;
+}
+.code-btn:active {opacity:.7}
+.code-box pre {
+  padding:13px;
+  overflow-x:auto;
+  white-space:pre;
+  font:12px/1.8 "Fira Code",monospace;
+  color:#e4ddff;
+  scrollbar-width:thin;
+}
+.bot-text {
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.bot-text strong {color:#d7c9ff}
 
 /* Attachments */
-.attachments{
-  display:flex;gap:7px;flex-wrap:wrap;
-  padding:0 2px 7px
+.attachments {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  padding:0 2px 7px;
 }
-.attachment{
-  display:flex;align-items:center;gap:7px;
-  background:#343044;border:1px solid #51466c;
-  padding:6px 9px;border-radius:10px;font-size:11px;
-  max-width:100%
+.attachment {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  background:#343044;
+  border:1px solid #51466c;
+  padding:6px 9px;
+  border-radius:10px;
+  font-size:11px;
+  max-width:100%;
 }
-.attachment span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px}
-.remove-file{border:0;background:none;color:#ff8b9e;font-size:17px;cursor:pointer}
+.attachment span {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:170px;
+}
+.remove-file {
+  border:0;
+  background:none;
+  color:#ff8b9e;
+  font-size:17px;
+  cursor:pointer;
+}
 
 /* Input */
-.input-area{
+.input-area {
   padding:10px 12px calc(12px + env(safe-area-inset-bottom));
   background:linear-gradient(0deg,#121218,#191922);
-  border-top:1px solid var(--border);flex-shrink:0
+  border-top:1px solid var(--border);
+  flex-shrink:0;
 }
-.input-row{display:flex;gap:8px;align-items:flex-end}
-.input-wrapper{
-  flex:1;background:var(--surface2);border:1px solid var(--border);
-  border-radius:20px;padding:4px 12px;min-width:0
+.input-row {display:flex;gap:8px;align-items:flex-end}
+.input-wrapper {
+  flex:1;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:4px 12px;
+  min-width:0;
 }
-.input-wrapper:focus-within{border-color:rgba(124,92,255,.6)}
-textarea{
-  width:100%;background:transparent;border:0;outline:0;
-  color:white;font-family:inherit;font-size:14px;resize:none;
-  max-height:120px;padding:9px 0;line-height:1.6
+.input-wrapper:focus-within {
+  border-color:rgba(124,92,255,.6);
 }
-textarea::placeholder{color:var(--muted)}
-.send-btn,.attach-btn{
-  width:44px;height:44px;flex-shrink:0;border:0;
-  border-radius:50%;display:grid;place-items:center;
-  cursor:pointer;font-size:20px
+textarea {
+  width:100%;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:white;
+  font-family:inherit;
+  font-size:14px;
+  resize:none;
+  max-height:120px;
+  padding:9px 0;
+  line-height:1.6;
 }
-.send-btn{background:linear-gradient(135deg,#7c5cff,#5b3fd4);color:white}
-.send-btn:disabled{opacity:.4}
-.attach-btn{background:#292735;color:#c9baff;border:1px solid var(--border)}
-.attach-btn:disabled{opacity:.4}
-.footer{
-  text-align:center;font-size:10px;color:#777;
-  padding:0 0 7px;background:#121218;flex-shrink:0
+textarea::placeholder {color:var(--muted)}
+.send-btn,.attach-btn {
+  width:44px;
+  height:44px;
+  flex-shrink:0;
+  border:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  font-size:20px;
+}
+.send-btn {
+  background:linear-gradient(135deg,#7c5cff,#5b3fd4);
+  color:white;
+}
+.send-btn:disabled,.attach-btn:disabled {opacity:.4}
+.attach-btn {
+  background:#292735;
+  color:#c9baff;
+  border:1px solid var(--border);
+}
+.footer {
+  text-align:center;
+  font-size:10px;
+  color:#777;
+  padding:0 0 7px;
+  background:#121218;
+  flex-shrink:0;
 }
 
 /* Preview */
-.preview-overlay{
-  display:none;position:fixed;inset:0;z-index:20;
-  background:rgba(0,0,0,.85);align-items:center;justify-content:center;
-  padding:12px
+.preview-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20;
+  background:rgba(0,0,0,.85);
+  align-items:center;
+  justify-content:center;
+  padding:12px;
 }
-.preview-overlay.active{display:flex}
-.preview-panel{
-  width:100%;max-width:700px;height:90dvh;
-  background:#171720;border:1px solid #393747;
-  border-radius:16px;display:flex;flex-direction:column;overflow:hidden
+.preview-overlay.active {display:flex}
+.preview-panel {
+  width:100%;
+  max-width:700px;
+  height:90dvh;
+  background:#171720;
+  border:1px solid #393747;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
-.preview-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px;background:#22222e
+.preview-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  background:#22222e;
 }
-.preview-header strong{font-size:13px}
-.preview-close{
-  background:#393747;color:white;border:0;border-radius:8px;
-  padding:7px 12px;font-family:inherit;cursor:pointer
+.preview-header strong {font-size:13px}
+.preview-close {
+  background:#393747;
+  color:white;
+  border:0;
+  border-radius:8px;
+  padding:7px 12px;
+  font-family:inherit;
+  cursor:pointer;
 }
-.preview-frame{flex:1;background:white;border:0;width:100%}
-.preview-note{
-  font-size:10px;color:#aaa;padding:7px 10px;
-  background:#22222e;text-align:center
+.preview-frame {
+  flex:1;
+  background:white;
+  border:0;
+  width:100%;
 }
-@media(min-width:500px){
-  .phone{height:90dvh;border:1px solid #292936;border-radius:25px}
+.preview-note {
+  font-size:10px;
+  color:#aaa;
+  padding:7px 10px;
+  background:#22222e;
+  text-align:center;
+}
+@media(min-width:500px) {
+  .phone {
+    height:90dvh;
+    border:1px solid #292936;
+    border-radius:25px;
+  }
 }
 </style>
 </head>
@@ -212,7 +381,7 @@ textarea::placeholder{color:var(--muted)}
   <div class="avatar">✦</div>
   <div class="header-info">
     <h1>Mani AI</h1>
-    <p><span class="status"></span> آنلاین • دستیار هوشمند</p>
+    <p><span class="status"></span> آنلاین • Gemini Flash-Lite</p>
   </div>
 </header>
 
@@ -234,6 +403,7 @@ textarea::placeholder{color:var(--muted)}
 
   <div class="input-row">
     <button class="attach-btn" id="attachBtn" title="ارسال فایل">＋</button>
+
     <input type="file" id="fileInput" hidden multiple
       accept="image/*,.pdf,.txt,.md,.html,.css,.js,.json,.xml,.csv,.py,.java,.cpp,.c,.php,.sql">
 
@@ -248,7 +418,6 @@ textarea::placeholder{color:var(--muted)}
 <div class="footer">Mani AI • FOX EGGS Ecosystem</div>
 </div>
 
-<!-- Local code preview -->
 <div class="preview-overlay" id="previewOverlay">
   <div class="preview-panel">
     <div class="preview-header">
@@ -257,7 +426,9 @@ textarea::placeholder{color:var(--muted)}
     </div>
     <iframe class="preview-frame" id="previewFrame"
       sandbox="allow-scripts"></iframe>
-    <div class="preview-note">اجرا در محیط جداگانه مرورگر انجام می‌شود.</div>
+    <div class="preview-note">
+      کد در محیط جداگانه مرورگر اجرا می‌شود.
+    </div>
   </div>
 </div>
 
@@ -266,11 +437,15 @@ textarea::placeholder{color:var(--muted)}
 // CONFIGURATION
 // ======================================
 
+// کلید API برای تست
 const API_KEY = "AQ.Ab8RN6KRcjvUIDCtKR4Jv5xYScU4Hk5FCxMxkYPcKCLZ2KsYzw";
+
+// مدل سریع Gemini
 const MODEL = "gemini-3.5-flash-lite";
 
+// API Streaming
 const API_URL =
-`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse&key=${API_KEY}`;
+`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse&key=${encodeURIComponent(API_KEY)}`;
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const MAX_ATTACHMENTS = 5;
@@ -288,7 +463,7 @@ If asked who created or owns Mani AI, answer:
 "I am Mani AI. My founder is Mani Rahbari, founder of the FOX EGGS ecosystem. Official website: https://foxeggs.netlify.app"
 
 Rules:
-- Always introduce yourself as Mani AI.
+- Always introduce yourself as Mani AI when appropriate.
 - Respond in the user's language.
 - Support Persian and English.
 - Be professional in programming.
@@ -297,6 +472,9 @@ Rules:
 - For web projects, provide complete HTML, CSS and JavaScript when requested.
 - Never invent facts.
 - Do not misrepresent your technical infrastructure.
+- Explain errors clearly.
+- Do not unnecessarily repeat the user's question.
+- Keep answers useful and clear.
 `;
 
 // ======================================
@@ -367,7 +545,8 @@ function readFile(file){
     reader.onload = ()=>resolve(reader.result);
     reader.onerror = ()=>reject(new Error("خواندن فایل ناموفق بود."));
 
-    if(file.type.startsWith("image/") || file.type === "application/pdf"){
+    if(file.type.startsWith("image/") ||
+       file.type === "application/pdf"){
       reader.readAsDataURL(file);
     }else{
       reader.readAsText(file);
@@ -392,6 +571,7 @@ fileInput.addEventListener("change",async()=>{
 
     const isImage = file.type.startsWith("image/");
     const isPDF = file.type === "application/pdf";
+
     const isText =
       file.type.startsWith("text/") ||
       /\.(txt|md|html|css|js|json|xml|csv|py|java|cpp|c|php|sql)$/i.test(file.name);
@@ -417,9 +597,7 @@ fileInput.addEventListener("change",async()=>{
         };
       }else{
         part = {
-          text:
-`[File: ${file.name}]
-${result}`
+          text:`[File: ${file.name}]\n${result}`
         };
       }
 
@@ -454,6 +632,7 @@ function renderAttachments(){
     const remove = document.createElement("button");
     remove.className = "remove-file";
     remove.textContent = "×";
+
     remove.onclick = ()=>{
       pendingFiles.splice(index,1);
       renderAttachments();
@@ -465,7 +644,7 @@ function renderAttachments(){
 }
 
 // ======================================
-// STREAMING REQUEST
+// GEMINI STREAMING
 // ======================================
 
 async function requestManiAI(contents,onChunk){
@@ -481,19 +660,35 @@ async function requestManiAI(contents,onChunk){
       },
       contents,
       generationConfig:{
-        temperature:0.7,
         maxOutputTokens:4096
       }
     })
   });
 
   if(!response.ok){
+
     let errorMessage = "خطای ارتباط با Gemini";
 
     try{
       const data = await response.json();
       errorMessage = data.error?.message || errorMessage;
     }catch{}
+
+    if(response.status === 400){
+      errorMessage = "درخواست نامعتبر است: "+errorMessage;
+    }
+
+    if(response.status === 401 || response.status === 403){
+      errorMessage = "کلید API نامعتبر است یا دسترسی لازم را ندارد.";
+    }
+
+    if(response.status === 404){
+      errorMessage = "مدل موردنظر پیدا نشد یا برای API شما فعال نیست.";
+    }
+
+    if(response.status === 429){
+      errorMessage = "محدودیت درخواست Gemini یا سهمیه API تمام شده است.";
+    }
 
     throw new Error(errorMessage);
   }
@@ -509,12 +704,15 @@ async function requestManiAI(contents,onChunk){
   let fullText = "";
 
   function processEvent(event){
-    const lines = event.split("\n");
+
+    const lines = event.split(/\r?\n/);
 
     for(const line of lines){
+
       if(!line.startsWith("data:")) continue;
 
       const raw = line.slice(5).trim();
+
       if(!raw || raw === "[DONE]") continue;
 
       let data;
@@ -548,6 +746,7 @@ async function requestManiAI(contents,onChunk){
   }
 
   while(true){
+
     const {value,done} = await reader.read();
 
     if(done) break;
@@ -555,6 +754,7 @@ async function requestManiAI(contents,onChunk){
     buffer += decoder.decode(value,{stream:true});
 
     const events = buffer.split(/\r?\n\r?\n/);
+
     buffer = events.pop() || "";
 
     for(const event of events){
@@ -593,6 +793,7 @@ async function sendMessage(){
 
   inputEl.value = "";
   inputEl.style.height = "auto";
+
   pendingFiles = [];
   renderAttachments();
 
@@ -601,7 +802,7 @@ async function sendMessage(){
   attachBtn.disabled = true;
 
   typingEl.classList.add("active");
-  typingText.textContent = "Mani AI در حال دریافت پاسخ است...";
+  typingText.textContent = "Gemini در حال دریافت پاسخ است...";
 
   const parts = [];
 
@@ -628,8 +829,9 @@ async function sendMessage(){
 
       botText = fullText;
 
-      // نمایش فوری متن در حین تولید
       const live = botBubble.querySelector(".live-content");
+
+      // نمایش فوری پاسخ
       live.textContent = fullText;
 
       scrollToBottom();
@@ -646,15 +848,18 @@ async function sendMessage(){
       parts:[{text:botText}]
     });
 
+    // محدود کردن تاریخچه برای کنترل مصرف توکن
     if(history.length > 20){
       history = history.slice(-16);
     }
 
   }catch(error){
 
-    console.error(error);
+    console.error("Mani AI Error:",error);
 
     botBubble.remove();
+
+    // حذف درخواست ناموفق از تاریخچه
     history.pop();
 
     addMessage("⚠️ خطا: "+error.message,"error");
@@ -662,11 +867,13 @@ async function sendMessage(){
   }finally{
 
     busy = false;
+
     sendBtn.disabled = false;
     attachBtn.disabled = false;
-    typingEl.classList.remove("active");
-    inputEl.focus();
 
+    typingEl.classList.remove("active");
+
+    inputEl.focus();
   }
 }
 
@@ -685,9 +892,12 @@ function addMessage(text,type,files=[]){
 
     files.forEach(file=>{
       const label = document.createElement("div");
+
       label.style.fontSize = "11px";
       label.style.marginTop = "5px";
+
       label.textContent = "📎 "+file.name;
+
       div.appendChild(label);
     });
 
@@ -696,6 +906,7 @@ function addMessage(text,type,files=[]){
   }
 
   messagesEl.appendChild(div);
+
   scrollToBottom();
 
   return div;
@@ -714,6 +925,7 @@ function createBotBubble(){
   live.className = "live-content bot-text";
 
   div.append(label,live);
+
   messagesEl.appendChild(div);
 
   scrollToBottom();
@@ -728,9 +940,9 @@ function createBotBubble(){
 function renderBotContent(container,text){
 
   const live = container.querySelector(".live-content");
+
   live.innerHTML = "";
 
-  // Extract fenced code blocks safely
   const regex = /```([a-zA-Z0-9_+#.-]*)\s*\n([\s\S]*?)```/g;
 
   let lastIndex = 0;
@@ -743,6 +955,7 @@ function renderBotContent(container,text){
     if(before) appendText(live,before);
 
     const language = (match[1] || "text").toLowerCase();
+
     const code = match[2].replace(/\n$/,"");
 
     createCodeBlock(live,language,code);
@@ -762,10 +975,9 @@ function appendText(parent,text){
   const div = document.createElement("div");
   div.className = "bot-text";
 
-  // Basic safe formatting
   const lines = text.split("\n");
 
-  lines.forEach((line,index)=>{
+  lines.forEach(line=>{
 
     const p = document.createElement("div");
 
@@ -774,13 +986,18 @@ function appendText(parent,text){
     boldParts.forEach(part=>{
 
       if(part.startsWith("**") && part.endsWith("**")){
-        const strong = document.createElement("strong");
-        strong.textContent = part.slice(2,-2);
-        p.appendChild(strong);
-      }else{
-        p.appendChild(document.createTextNode(part));
-      }
 
+        const strong = document.createElement("strong");
+
+        strong.textContent = part.slice(2,-2);
+
+        p.appendChild(strong);
+
+      }else{
+
+        p.appendChild(document.createTextNode(part));
+
+      }
     });
 
     div.appendChild(p);
@@ -804,29 +1021,43 @@ function createCodeBlock(parent,language,code){
   const actions = document.createElement("div");
   actions.className = "code-actions";
 
+  // Copy
   const copy = document.createElement("button");
+
   copy.className = "code-btn";
   copy.textContent = "کپی کد";
 
   copy.onclick = async()=>{
+
     try{
+
       await navigator.clipboard.writeText(code);
-      copy.textContent = "کپی شد ✓";
+
     }catch{
+
       const area = document.createElement("textarea");
+
       area.value = code;
+
       document.body.appendChild(area);
+
       area.select();
+
       document.execCommand("copy");
+
       area.remove();
-      copy.textContent = "کپی شد ✓";
     }
 
-    setTimeout(()=>copy.textContent="کپی کد",1500);
+    copy.textContent = "کپی شد ✓";
+
+    setTimeout(()=>{
+      copy.textContent = "کپی کد";
+    },1500);
   };
 
   actions.appendChild(copy);
 
+  // Run
   const runnable = [
     "html","htm","javascript","js","css"
   ].includes(language);
@@ -834,7 +1065,9 @@ function createCodeBlock(parent,language,code){
   if(runnable){
 
     const run = document.createElement("button");
+
     run.className = "code-btn run";
+
     run.textContent = "▶ اجرا";
 
     run.onclick = ()=>runCode(language,code);
@@ -845,11 +1078,15 @@ function createCodeBlock(parent,language,code){
   head.append(lang,actions);
 
   const pre = document.createElement("pre");
+
   const codeEl = document.createElement("code");
+
   codeEl.textContent = code;
 
   pre.appendChild(codeEl);
+
   box.append(head,pre);
+
   parent.appendChild(box);
 }
 
@@ -862,54 +1099,88 @@ function runCode(language,code){
   let html = "";
 
   if(language === "html" || language === "htm"){
+
     html = code;
+
   }
 
   else if(language === "css"){
-    html = `
-      <!DOCTYPE html>
-      <html>
-      <head><style>${code}</style></head>
-      <body><h3>CSS Preview</h3><p>کد CSS اجرا شد.</p></body>
-      </html>
-    `;
-  }
-
-  else if(language === "javascript" || language === "js"){
 
     html = `
       <!DOCTYPE html>
       <html>
       <head>
+        <meta charset="UTF-8">
+        <style>${code}</style>
+      </head>
+      <body>
+        <h3>CSS Preview</h3>
+        <p>کد CSS اجرا شد.</p>
+      </body>
+      </html>
+    `;
+
+  }
+
+  else if(language === "javascript" || language === "js"){
+
+    // اجرای JavaScript در iframe جداگانه
+    const safeCode = JSON.stringify(code);
+
+    html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
         <style>
-          body{font-family:Arial;padding:20px;color:#222}
-          pre{background:#eee;padding:12px;white-space:pre-wrap}
+          body {
+            font-family:Arial;
+            padding:20px;
+            color:#222;
+          }
+          pre {
+            background:#eee;
+            padding:12px;
+            white-space:pre-wrap;
+            overflow-wrap:anywhere;
+          }
         </style>
       </head>
       <body>
+
         <h3>JavaScript Preview</h3>
+
         <pre id="output">در حال اجرا...</pre>
+
         <script>
           const output = document.getElementById("output");
+
           const oldLog = console.log;
+
           console.log = (...args)=>{
-            output.textContent += "\\n" + args.join(" ");
+            output.textContent += "\\n" + args.map(String).join(" ");
             oldLog(...args);
           };
 
-          try{
+          try {
             output.textContent = "اجرا شد.\\n";
-            ${code}
-          }catch(error){
+
+            const userCode = ${safeCode};
+
+            new Function(userCode)();
+
+          } catch(error) {
             output.textContent += "\\nخطا: " + error.message;
           }
         <\/script>
+
       </body>
       </html>
     `;
   }
 
   previewFrame.srcdoc = html;
+
   previewOverlay.classList.add("active");
 }
 
@@ -918,12 +1189,14 @@ function runCode(language,code){
 // ======================================
 
 function scrollToBottom(){
+
   requestAnimationFrame(()=>{
     messagesEl.scrollTop = messagesEl.scrollHeight;
   });
 }
 
 inputEl.focus();
+
 </script>
 </body>
 </html>
