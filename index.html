@@ -1,28 +1,929 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080b14"><title>MANIX — HTML Studio</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
-:root{--bg:#080b14;--panel:#111a2a;--line:#283750;--text:#f4f6ff;--muted:#9eabc2;--purple:#9165ff;--cyan:#35c5d7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#4e2b8848,transparent 36%),var(--bg);color:var(--text);font-family:Vazirmatn,system-ui}.app{max-width:1100px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:11px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:grid;place-items:center;font-size:25px;font-weight:800}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1px}.status{font-size:10px;color:#8ce3c4;border:1px solid #285849;border-radius:30px;padding:7px 11px}.hero,.panel{background:linear-gradient(145deg,#151f32,#101725);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px}.hero{background:linear-gradient(110deg,#291b49,#102b3b);border-color:#654b9e}.hero h1{font-size:24px;margin:0 0 4px}.hero p,.hint{color:var(--muted);font-size:11px;line-height:1.9;margin:4px 0}.tabs,.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.btn{background:#1b2740;border:1px solid var(--line);border-radius:10px;color:#edf0ff;padding:10px 13px;font:inherit;font-size:11px;cursor:pointer}.btn.primary{background:linear-gradient(110deg,#8758e9,#536bdd);border:0}.btn:active{transform:scale(.98)}.tab.active{background:#38265f;border-color:#8664d4}.view{display:none}.view.active{display:block}textarea{width:100%;background:#090f1b;color:#f3f6ff;border:1px solid #34435e;border-radius:12px;padding:13px;font:12px/1.8 Vazirmatn;resize:vertical;min-height:110px;outline:none}textarea:focus{border-color:var(--purple)}.editor{direction:ltr;text-align:left;font:12px/1.65 ui-monospace,Consolas,monospace;min-height:360px;white-space:pre;tab-size:2}.output{white-space:pre-wrap;overflow-wrap:anywhere;background:#090f1b;border:1px solid var(--line);padding:12px;border-radius:12px;font-size:11px;line-height:1.9}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.label{display:block;font-size:12px;font-weight:700;margin-bottom:8px}.preview{width:100%;height:420px;background:white;border:1px solid var(--line);border-radius:12px}.hidden{display:none!important}.muted{color:var(--muted);font-size:10px}.actions{display:flex;gap:7px;flex-wrap:wrap}.result{margin-top:10px}.footer{text-align:center;color:#68758d;font-size:10px;padding:20px}@media(max-width:700px){.app{padding:11px}.grid{grid-template-columns:1fr}.editor{min-height:300px}.preview{height:360px}.top{align-items:flex-start}.hero h1{font-size:21px}}
-</style></head><body><div class="app">
-<header class="top"><div class="brand"><div class="logo">M</div><div><b>MANIX HTML STUDIO</b><small>GENERATE · EDIT · ANALYZE · EXPORT</small></div></div><span class="status" id="status">در حال بارگذاری دانش HTML</span></header>
-<section class="hero"><h1>دقیق بگو چه HTML می‌خواهی.</h1><p>ساخت صفحه از توضیح تو، ویرایش کد موجود، بررسی ساختار و دریافت فایل قابل کپی و استفاده.</p></section>
-<div class="tabs"><button class="btn tab active" data-view="create">ساخت کد</button><button class="btn tab" data-view="edit">ویرایش کد</button><button class="btn tab" data-view="inspect">پردازش و بررسی</button></div>
-<section class="panel view active" id="create"><label class="label" for="request">توضیح پروژه‌ات را بنویس</label><textarea id="request" placeholder="مثلاً یک سایت فروشگاهی دارک و حرفه‌ای با کارت محصول، قیمت، دکمه افزودن به سبد، هدر و طراحی کاملاً موبایلی بساز. رنگ بنفش باشد."></textarea><div class="toolbar"><button class="btn primary" id="generate">تولید کد HTML</button><button class="btn" id="sample">نمونه درخواست</button></div><div class="result hidden" id="generatedBox"><div class="actions"><button class="btn" id="copyGenerated">کپی کد</button><button class="btn" id="downloadGenerated">دانلود index.html</button><button class="btn" id="showPreview">پیش‌نمایش</button></div><textarea class="editor" id="generated" spellcheck="false"></textarea><iframe class="preview hidden" id="preview" title="پیش‌نمایش صفحه تولیدشده" sandbox="allow-scripts"></iframe></div></section>
-<section class="panel view" id="edit"><label class="label" for="source">کد HTML فعلی را اینجا قرار بده</label><textarea class="editor" id="source" placeholder="کد کامل HTML را اینجا paste کن..."></textarea><label class="label" for="editRequest" style="margin-top:12px">چه تغییری انجام بدهم؟</label><textarea id="editRequest" style="min-height:75px" placeholder="مثلاً عنوان را به فروشگاه MANIX تغییر بده، رنگ اصلی را آبی کن و یک بخش جدید اضافه کن."></textarea><div class="toolbar"><button class="btn primary" id="applyEdit">اعمال تغییرات</button><button class="btn" id="format">مرتب‌سازی کد</button><button class="btn" id="copyEdit">کپی خروجی</button><button class="btn" id="downloadEdit">دانلود HTML</button></div><textarea class="editor" id="edited" placeholder="خروجی ویرایش‌شده اینجا نمایش داده می‌شود..." spellcheck="false"></textarea><p class="hint">ویرایشگر فعلی تغییرات ساختاری مشخص را اعمال می‌کند؛ برای تغییرات پیچیده‌تر باید دستور دقیق بدهی و خروجی را بررسی کنی.</p></section>
-<section class="panel view" id="inspect"><label class="label" for="inspectCode">کد HTML برای پردازش</label><textarea class="editor" id="inspectCode" placeholder="کد HTML را اینجا قرار بده..."></textarea><div class="toolbar"><button class="btn primary" id="analyze">بررسی HTML</button><button class="btn" id="beautify">مرتب‌سازی</button><button class="btn" id="downloadInspect">دانلود کد</button></div><div class="output" id="report">گزارش بررسی اینجا نمایش داده می‌شود.</div></section>
-<div class="footer">MANIX · پایگاه دانش HTML از فایل p.json خوانده می‌شود</div></div>
-<script src="engine.js"></script><script>
-const $=id=>document.getElementById(id);let lastGenerated='';
-function saveFile(name,content){const a=document.createElement('a');const u=URL.createObjectURL(new Blob([content],{type:'text/html;charset=utf-8'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-async function copy(text){try{await navigator.clipboard.writeText(text);alert('کپی شد')}catch(e){const t=document.createElement('textarea');t.value=text;document.body.append(t);t.select();document.execCommand('copy');t.remove();alert('کپی شد')}}
-async function init(){try{const k=await MANIX_HTML.load();$('status').textContent='دانش HTML بارگذاری شد · '+Object.keys(k.elements).length+' گروه عنصر';}catch(e){$('status').textContent=e.message;}}
-document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===b.dataset.view))});
-$('sample').onclick=()=>$('request').value='یک وب‌سایت فروشگاهی مدرن و دارک برای فروش لوازم دیجیتال بساز. هدر چسبان، منوی خانه و محصولات، کارت محصول با قیمت و دکمه افزودن به سبد، بخش درباره ما، فوتر و طراحی کاملاً ریسپانسیو برای موبایل داشته باشد. رنگ بنفش و آبی استفاده کن.';
-$('generate').onclick=()=>{const q=$('request').value.trim();if(!q){alert('اول توضیح پروژه را بنویس.');return}lastGenerated=MANIX_HTML.buildHTML(q);$('generated').value=lastGenerated;$('generatedBox').classList.remove('hidden');$('preview').classList.add('hidden')};
-$('copyGenerated').onclick=()=>$('generated').select()&&copy($('generated').value);$('downloadGenerated').onclick=()=>saveFile('index.html',$('generated').value);$('showPreview').onclick=()=>{const f=$('preview');f.srcdoc=$('generated').value;f.classList.toggle('hidden')};
-$('applyEdit').onclick=()=>{const s=$('source').value;if(!s.trim()){alert('کد HTML را وارد کن.');return}$('edited').value=MANIX_HTML.modify(s,$('editRequest').value)};
-$('format').onclick=()=>{$('edited').value=MANIX_HTML.formatHTML($('source').value)};
-$('copyEdit').onclick=()=>copy($('edited').value);$('downloadEdit').onclick=()=>saveFile('edited.html',$('edited').value);
-$('analyze').onclick=()=>{const s=$('inspectCode').value;if(!s.trim()){alert('کد HTML را وارد کن.');return}$('report').textContent=MANIX_HTML.analyze(s).map((x,i)=>(i+1)+'. '+x).join('\n')};
-$('beautify').onclick=()=>{$('inspectCode').value=MANIX_HTML.formatHTML($('inspectCode').value);$('report').textContent='کد مرتب شد.'};
-$('downloadInspect').onclick=()=>saveFile('processed.html',$('inspectCode').value);
-init();
-</script></body></html>
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0f13">
+<title>Mani AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f0f13;
+  --surface:#1a1a22;
+  --surface2:#242430;
+  --primary:#7c5cff;
+  --accent:#00d4aa;
+  --text:#f0f0f5;
+  --muted:#9a9aab;
+  --border:rgba(255,255,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:Vazirmatn,sans-serif;
+  background:#050508;color:var(--text);
+  min-height:100dvh;display:flex;justify-content:center;
+  align-items:center;overflow:hidden
+}
+.phone{
+  width:100%;max-width:500px;height:100dvh;max-height:950px;
+  background:var(--bg);display:flex;flex-direction:column;overflow:hidden
+}
+.header{
+  padding:14px 16px;display:flex;align-items:center;gap:12px;
+  background:linear-gradient(180deg,#1a1a24,#121218);
+  border-bottom:1px solid var(--border);flex-shrink:0
+}
+.avatar{
+  width:45px;height:45px;border-radius:50%;
+  background:linear-gradient(135deg,#7c5cff,#00d4aa);
+  display:grid;place-items:center;font-size:23px;
+  box-shadow:0 0 20px rgba(124,92,255,.3)
+}
+.header-info{flex:1}
+.header-info h1{font-size:17px;font-weight:700}
+.header-info p{font-size:12px;color:var(--accent)}
+.status{
+  display:inline-block;width:7px;height:7px;background:var(--accent);
+  border-radius:50%;margin-left:5px
+}
+.messages{
+  flex:1;overflow-y:auto;padding:17px 14px;
+  display:flex;flex-direction:column;gap:13px;
+  background:radial-gradient(ellipse at top,rgba(124,92,255,.06),transparent 50%),var(--bg);
+  scroll-behavior:smooth
+}
+.msg{
+  max-width:95%;padding:11px 14px;border-radius:18px;
+  font-size:14px;line-height:1.85;overflow-wrap:anywhere;
+  animation:fade .2s ease
+}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.user{
+  align-self:flex-start;background:linear-gradient(135deg,#7c5cff,#5b3fd4);
+  border-bottom-right-radius:5px;white-space:pre-wrap
+}
+.bot{
+  align-self:flex-end;width:100%;max-width:100%;
+  background:#242430;border:1px solid var(--border);
+  border-bottom-left-radius:5px;white-space:normal
+}
+.label{
+  display:block;font-size:11px;color:#a78bfa;
+  margin-bottom:7px;font-weight:600
+}
+.error{
+  align-self:center;max-width:95%;
+  background:rgba(255,92,122,.12);
+  border:1px solid rgba(255,92,122,.3);
+  color:#ff8a9e;text-align:center;font-size:13px
+}
+.welcome{text-align:center;margin:auto;padding:25px 15px;color:var(--muted)}
+.welcome .icon{font-size:48px;color:var(--primary)}
+.welcome h2{font-size:20px;color:white;margin:10px 0}
+.welcome p{font-size:13px;line-height:1.9}
+.typing{
+  display:none;padding:9px 18px;color:var(--muted);
+  font-size:12px;flex-shrink:0
+}
+.typing.active{display:block}
+.typing-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-left:4px;
+  animation:pulse .8s infinite alternate
+}
+@keyframes pulse{to{opacity:.25;transform:translateY(-3px)}}
+
+/* Code blocks */
+.code-box{
+  direction:ltr;text-align:left;margin:12px 0;
+  background:#101017;border:1px solid #393747;
+  border-radius:12px;overflow:hidden;max-width:100%
+}
+.code-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 11px;background:#191923;border-bottom:1px solid var(--border);
+  gap:8px
+}
+.code-lang{color:#b9a9ff;font-size:11px;font-family:monospace}
+.code-actions{display:flex;gap:6px;flex-wrap:wrap}
+.code-btn{
+  border:1px solid #444052;background:#292735;color:#eee;
+  border-radius:7px;padding:5px 9px;font-size:11px;
+  font-family:Vazirmatn,sans-serif;cursor:pointer
+}
+.code-btn.run{background:#145c4d;border-color:#187d68;color:#a7ffe7}
+.code-btn:active{opacity:.7}
+.code-box pre{
+  padding:13px;overflow-x:auto;white-space:pre;
+  font:12px/1.8 "Fira Code",monospace;color:#e4ddff;
+  scrollbar-width:thin
+}
+.code-box code{font-family:inherit}
+.bot-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.bot-text p{margin:5px 0}
+.bot-text strong{color:#d7c9ff}
+.bot-text ul{padding-right:20px}
+.bot-text a{color:#a78bfa}
+
+/* Attachments */
+.attachments{
+  display:flex;gap:7px;flex-wrap:wrap;
+  padding:0 2px 7px
+}
+.attachment{
+  display:flex;align-items:center;gap:7px;
+  background:#343044;border:1px solid #51466c;
+  padding:6px 9px;border-radius:10px;font-size:11px;
+  max-width:100%
+}
+.attachment span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px}
+.remove-file{border:0;background:none;color:#ff8b9e;font-size:17px;cursor:pointer}
+
+/* Input */
+.input-area{
+  padding:10px 12px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,#121218,#191922);
+  border-top:1px solid var(--border);flex-shrink:0
+}
+.input-row{display:flex;gap:8px;align-items:flex-end}
+.input-wrapper{
+  flex:1;background:var(--surface2);border:1px solid var(--border);
+  border-radius:20px;padding:4px 12px;min-width:0
+}
+.input-wrapper:focus-within{border-color:rgba(124,92,255,.6)}
+textarea{
+  width:100%;background:transparent;border:0;outline:0;
+  color:white;font-family:inherit;font-size:14px;resize:none;
+  max-height:120px;padding:9px 0;line-height:1.6
+}
+textarea::placeholder{color:var(--muted)}
+.send-btn,.attach-btn{
+  width:44px;height:44px;flex-shrink:0;border:0;
+  border-radius:50%;display:grid;place-items:center;
+  cursor:pointer;font-size:20px
+}
+.send-btn{background:linear-gradient(135deg,#7c5cff,#5b3fd4);color:white}
+.send-btn:disabled{opacity:.4}
+.attach-btn{background:#292735;color:#c9baff;border:1px solid var(--border)}
+.attach-btn:disabled{opacity:.4}
+.footer{
+  text-align:center;font-size:10px;color:#777;
+  padding:0 0 7px;background:#121218;flex-shrink:0
+}
+
+/* Preview */
+.preview-overlay{
+  display:none;position:fixed;inset:0;z-index:20;
+  background:rgba(0,0,0,.85);align-items:center;justify-content:center;
+  padding:12px
+}
+.preview-overlay.active{display:flex}
+.preview-panel{
+  width:100%;max-width:700px;height:90dvh;
+  background:#171720;border:1px solid #393747;
+  border-radius:16px;display:flex;flex-direction:column;overflow:hidden
+}
+.preview-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px;background:#22222e
+}
+.preview-header strong{font-size:13px}
+.preview-close{
+  background:#393747;color:white;border:0;border-radius:8px;
+  padding:7px 12px;font-family:inherit;cursor:pointer
+}
+.preview-frame{flex:1;background:white;border:0;width:100%}
+.preview-note{
+  font-size:10px;color:#aaa;padding:7px 10px;
+  background:#22222e;text-align:center
+}
+@media(min-width:500px){
+  .phone{height:90dvh;border:1px solid #292936;border-radius:25px}
+}
+</style>
+</head>
+
+<body>
+<div class="phone">
+
+<header class="header">
+  <div class="avatar">✦</div>
+  <div class="header-info">
+    <h1>Mani AI</h1>
+    <p><span class="status"></span> آنلاین • دستیار هوشمند</p>
+  </div>
+</header>
+
+<div class="messages" id="messages">
+  <div class="welcome" id="welcome">
+    <div class="icon">✦</div>
+    <h2>سلام! من Mani AI هستم</h2>
+    <p>دستیار هوشمند تو برای گفتگو، برنامه‌نویسی و حل مسائل مختلف ✨</p>
+  </div>
+</div>
+
+<div class="typing" id="typing">
+  <span class="typing-dot"></span>
+  <span id="typingText">Mani AI در حال فکر کردن است...</span>
+</div>
+
+<div class="input-area">
+  <div class="attachments" id="attachments"></div>
+
+  <div class="input-row">
+    <button class="attach-btn" id="attachBtn" title="ارسال فایل">＋</button>
+    <input type="file" id="fileInput" hidden multiple
+      accept="image/*,.pdf,.txt,.md,.html,.css,.js,.json,.xml,.csv,.py,.java,.cpp,.c,.php,.sql">
+
+    <div class="input-wrapper">
+      <textarea id="input" rows="1" placeholder="پیامت رو بنویس..."></textarea>
+    </div>
+
+    <button class="send-btn" id="sendBtn" title="ارسال">➤</button>
+  </div>
+</div>
+
+<div class="footer">Mani AI • FOX EGGS Ecosystem</div>
+</div>
+
+<!-- Local code preview -->
+<div class="preview-overlay" id="previewOverlay">
+  <div class="preview-panel">
+    <div class="preview-header">
+      <strong>پیش‌نمایش اجرای کد</strong>
+      <button class="preview-close" id="closePreview">بستن ✕</button>
+    </div>
+    <iframe class="preview-frame" id="previewFrame"
+      sandbox="allow-scripts"></iframe>
+    <div class="preview-note">اجرا در محیط جداگانه مرورگر انجام می‌شود.</div>
+  </div>
+</div>
+
+<script>
+// ======================================
+// CONFIGURATION
+// ======================================
+
+const API_KEY = "AQ.Ab8RN6KRcjvUIDCtKR4Jv5xYScU4Hk5FCxMxkYPcKCLZ2KsYzw";
+const MODEL = "gemini-3.5-flash-lite";
+
+const API_URL =
+`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse&key=${API_KEY}`;
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_ATTACHMENTS = 5;
+
+const SYSTEM_PROMPT = `
+You are Mani AI, a helpful and intelligent AI assistant.
+
+Identity:
+Name: Mani AI
+Founder: Mani Rahbari
+Founder position: Founder of FOX EGGS ecosystem
+Official website: https://foxeggs.netlify.app
+
+If asked who created or owns Mani AI, answer:
+"I am Mani AI. My founder is Mani Rahbari, founder of the FOX EGGS ecosystem. Official website: https://foxeggs.netlify.app"
+
+Rules:
+- Always introduce yourself as Mani AI.
+- Respond in the user's language.
+- Support Persian and English.
+- Be professional in programming.
+- Provide complete and working code when requested.
+- When writing code, use Markdown fenced code blocks with the correct language.
+- For web projects, provide complete HTML, CSS and JavaScript when requested.
+- Never invent facts.
+- Do not misrepresent your technical infrastructure.
+`;
+
+// ======================================
+// ELEMENTS
+// ======================================
+
+const messagesEl = document.getElementById("messages");
+const inputEl = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+const typingEl = document.getElementById("typing");
+const typingText = document.getElementById("typingText");
+const welcomeEl = document.getElementById("welcome");
+const attachBtn = document.getElementById("attachBtn");
+const fileInput = document.getElementById("fileInput");
+const attachmentsEl = document.getElementById("attachments");
+
+const previewOverlay = document.getElementById("previewOverlay");
+const previewFrame = document.getElementById("previewFrame");
+const closePreview = document.getElementById("closePreview");
+
+let history = [];
+let busy = false;
+let pendingFiles = [];
+
+// ======================================
+// INPUT
+// ======================================
+
+inputEl.addEventListener("input",()=>{
+  inputEl.style.height = "auto";
+  inputEl.style.height =
+    Math.min(inputEl.scrollHeight,120) + "px";
+});
+
+inputEl.addEventListener("keydown",e=>{
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+sendBtn.addEventListener("click",sendMessage);
+
+attachBtn.addEventListener("click",()=>{
+  if(!busy) fileInput.click();
+});
+
+closePreview.addEventListener("click",()=>{
+  previewOverlay.classList.remove("active");
+  previewFrame.srcdoc = "";
+});
+
+previewOverlay.addEventListener("click",e=>{
+  if(e.target === previewOverlay){
+    previewOverlay.classList.remove("active");
+    previewFrame.srcdoc = "";
+  }
+});
+
+// ======================================
+// FILE HANDLING
+// ======================================
+
+function readFile(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = ()=>reject(new Error("خواندن فایل ناموفق بود."));
+
+    if(file.type.startsWith("image/") || file.type === "application/pdf"){
+      reader.readAsDataURL(file);
+    }else{
+      reader.readAsText(file);
+    }
+  });
+}
+
+fileInput.addEventListener("change",async()=>{
+  const files = Array.from(fileInput.files || []);
+
+  for(const file of files){
+
+    if(pendingFiles.length >= MAX_ATTACHMENTS){
+      addMessage("حداکثر ۵ فایل می‌توانی ارسال کنی.","error");
+      break;
+    }
+
+    if(file.size > MAX_FILE_SIZE){
+      addMessage(`حجم فایل ${file.name} بیشتر از ۱۰ مگابایت است.`,"error");
+      continue;
+    }
+
+    const isImage = file.type.startsWith("image/");
+    const isPDF = file.type === "application/pdf";
+    const isText =
+      file.type.startsWith("text/") ||
+      /\.(txt|md|html|css|js|json|xml|csv|py|java|cpp|c|php|sql)$/i.test(file.name);
+
+    if(!isImage && !isPDF && !isText){
+      addMessage(`فرمت فایل ${file.name} پشتیبانی نمی‌شود.`,"error");
+      continue;
+    }
+
+    try{
+      const result = await readFile(file);
+
+      let part;
+
+      if(isImage || isPDF){
+        const base64 = result.split(",")[1];
+
+        part = {
+          inlineData:{
+            mimeType:file.type,
+            data:base64
+          }
+        };
+      }else{
+        part = {
+          text:
+`[File: ${file.name}]
+${result}`
+        };
+      }
+
+      pendingFiles.push({
+        name:file.name,
+        type:file.type,
+        part
+      });
+
+    }catch(error){
+      addMessage("خطا در خواندن فایل: "+file.name,"error");
+    }
+  }
+
+  fileInput.value = "";
+  renderAttachments();
+});
+
+function renderAttachments(){
+  attachmentsEl.innerHTML = "";
+
+  pendingFiles.forEach((file,index)=>{
+    const item = document.createElement("div");
+    item.className = "attachment";
+
+    const icon = file.type.startsWith("image/") ? "🖼️" :
+      file.type === "application/pdf" ? "📕" : "📄";
+
+    const name = document.createElement("span");
+    name.textContent = icon+" "+file.name;
+
+    const remove = document.createElement("button");
+    remove.className = "remove-file";
+    remove.textContent = "×";
+    remove.onclick = ()=>{
+      pendingFiles.splice(index,1);
+      renderAttachments();
+    };
+
+    item.append(name,remove);
+    attachmentsEl.appendChild(item);
+  });
+}
+
+// ======================================
+// STREAMING REQUEST
+// ======================================
+
+async function requestManiAI(contents,onChunk){
+
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      systemInstruction:{
+        parts:[{text:SYSTEM_PROMPT}]
+      },
+      contents,
+      generationConfig:{
+        temperature:0.7,
+        maxOutputTokens:4096
+      }
+    })
+  });
+
+  if(!response.ok){
+    let errorMessage = "خطای ارتباط با Gemini";
+
+    try{
+      const data = await response.json();
+      errorMessage = data.error?.message || errorMessage;
+    }catch{}
+
+    throw new Error(errorMessage);
+  }
+
+  if(!response.body){
+    throw new Error("مرورگر از پاسخ‌دهی جریانی پشتیبانی نمی‌کند.");
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+
+  let buffer = "";
+  let fullText = "";
+
+  function processEvent(event){
+    const lines = event.split("\n");
+
+    for(const line of lines){
+      if(!line.startsWith("data:")) continue;
+
+      const raw = line.slice(5).trim();
+      if(!raw || raw === "[DONE]") continue;
+
+      let data;
+
+      try{
+        data = JSON.parse(raw);
+      }catch{
+        continue;
+      }
+
+      if(data.error){
+        throw new Error(data.error.message || "خطای Gemini");
+      }
+
+      const candidate = data.candidates?.[0];
+
+      if(candidate?.finishReason === "SAFETY"){
+        throw new Error("این درخواست قابل پاسخ‌گویی نیست.");
+      }
+
+      const chunk = candidate?.content?.parts
+        ?.filter(part=>typeof part.text === "string")
+        .map(part=>part.text)
+        .join("") || "";
+
+      if(chunk){
+        fullText += chunk;
+        onChunk(chunk,fullText);
+      }
+    }
+  }
+
+  while(true){
+    const {value,done} = await reader.read();
+
+    if(done) break;
+
+    buffer += decoder.decode(value,{stream:true});
+
+    const events = buffer.split(/\r?\n\r?\n/);
+    buffer = events.pop() || "";
+
+    for(const event of events){
+      processEvent(event);
+    }
+  }
+
+  buffer += decoder.decode();
+
+  if(buffer.trim()){
+    processEvent(buffer);
+  }
+
+  return fullText;
+}
+
+// ======================================
+// SEND MESSAGE
+// ======================================
+
+async function sendMessage(){
+
+  const text = inputEl.value.trim();
+
+  if((!text && pendingFiles.length === 0) || busy) return;
+
+  if(welcomeEl) welcomeEl.style.display = "none";
+
+  const selectedFiles = [...pendingFiles];
+
+  addMessage(
+    text || "لطفاً فایل‌های ارسال‌شده را بررسی کن.",
+    "user",
+    selectedFiles
+  );
+
+  inputEl.value = "";
+  inputEl.style.height = "auto";
+  pendingFiles = [];
+  renderAttachments();
+
+  busy = true;
+  sendBtn.disabled = true;
+  attachBtn.disabled = true;
+
+  typingEl.classList.add("active");
+  typingText.textContent = "Mani AI در حال دریافت پاسخ است...";
+
+  const parts = [];
+
+  if(text) parts.push({text});
+
+  selectedFiles.forEach(file=>{
+    parts.push(file.part);
+  });
+
+  history.push({
+    role:"user",
+    parts
+  });
+
+  const botBubble = createBotBubble();
+
+  let botText = "";
+
+  try{
+
+    typingText.textContent = "Mani AI در حال نوشتن است...";
+
+    botText = await requestManiAI(history,(chunk,fullText)=>{
+
+      botText = fullText;
+
+      // نمایش فوری متن در حین تولید
+      const live = botBubble.querySelector(".live-content");
+      live.textContent = fullText;
+
+      scrollToBottom();
+    });
+
+    if(!botText.trim()){
+      throw new Error("پاسخی از هوش مصنوعی دریافت نشد.");
+    }
+
+    renderBotContent(botBubble,botText);
+
+    history.push({
+      role:"model",
+      parts:[{text:botText}]
+    });
+
+    if(history.length > 20){
+      history = history.slice(-16);
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    botBubble.remove();
+    history.pop();
+
+    addMessage("⚠️ خطا: "+error.message,"error");
+
+  }finally{
+
+    busy = false;
+    sendBtn.disabled = false;
+    attachBtn.disabled = false;
+    typingEl.classList.remove("active");
+    inputEl.focus();
+
+  }
+}
+
+// ======================================
+// MESSAGE DISPLAY
+// ======================================
+
+function addMessage(text,type,files=[]){
+
+  const div = document.createElement("div");
+  div.className = "msg "+type;
+
+  if(type === "user"){
+
+    div.textContent = text;
+
+    files.forEach(file=>{
+      const label = document.createElement("div");
+      label.style.fontSize = "11px";
+      label.style.marginTop = "5px";
+      label.textContent = "📎 "+file.name;
+      div.appendChild(label);
+    });
+
+  }else{
+    div.textContent = text;
+  }
+
+  messagesEl.appendChild(div);
+  scrollToBottom();
+
+  return div;
+}
+
+function createBotBubble(){
+
+  const div = document.createElement("div");
+  div.className = "msg bot";
+
+  const label = document.createElement("span");
+  label.className = "label";
+  label.textContent = "Mani AI";
+
+  const live = document.createElement("div");
+  live.className = "live-content bot-text";
+
+  div.append(label,live);
+  messagesEl.appendChild(div);
+
+  scrollToBottom();
+
+  return div;
+}
+
+// ======================================
+// MARKDOWN + CODE RENDERING
+// ======================================
+
+function renderBotContent(container,text){
+
+  const live = container.querySelector(".live-content");
+  live.innerHTML = "";
+
+  // Extract fenced code blocks safely
+  const regex = /```([a-zA-Z0-9_+#.-]*)\s*\n([\s\S]*?)```/g;
+
+  let lastIndex = 0;
+  let match;
+
+  while((match = regex.exec(text)) !== null){
+
+    const before = text.slice(lastIndex,match.index);
+
+    if(before) appendText(live,before);
+
+    const language = (match[1] || "text").toLowerCase();
+    const code = match[2].replace(/\n$/,"");
+
+    createCodeBlock(live,language,code);
+
+    lastIndex = regex.lastIndex;
+  }
+
+  const remaining = text.slice(lastIndex);
+
+  if(remaining) appendText(live,remaining);
+
+  scrollToBottom();
+}
+
+function appendText(parent,text){
+
+  const div = document.createElement("div");
+  div.className = "bot-text";
+
+  // Basic safe formatting
+  const lines = text.split("\n");
+
+  lines.forEach((line,index)=>{
+
+    const p = document.createElement("div");
+
+    const boldParts = line.split(/(\*\*.*?\*\*)/g);
+
+    boldParts.forEach(part=>{
+
+      if(part.startsWith("**") && part.endsWith("**")){
+        const strong = document.createElement("strong");
+        strong.textContent = part.slice(2,-2);
+        p.appendChild(strong);
+      }else{
+        p.appendChild(document.createTextNode(part));
+      }
+
+    });
+
+    div.appendChild(p);
+  });
+
+  parent.appendChild(div);
+}
+
+function createCodeBlock(parent,language,code){
+
+  const box = document.createElement("div");
+  box.className = "code-box";
+
+  const head = document.createElement("div");
+  head.className = "code-head";
+
+  const lang = document.createElement("span");
+  lang.className = "code-lang";
+  lang.textContent = language.toUpperCase();
+
+  const actions = document.createElement("div");
+  actions.className = "code-actions";
+
+  const copy = document.createElement("button");
+  copy.className = "code-btn";
+  copy.textContent = "کپی کد";
+
+  copy.onclick = async()=>{
+    try{
+      await navigator.clipboard.writeText(code);
+      copy.textContent = "کپی شد ✓";
+    }catch{
+      const area = document.createElement("textarea");
+      area.value = code;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+      copy.textContent = "کپی شد ✓";
+    }
+
+    setTimeout(()=>copy.textContent="کپی کد",1500);
+  };
+
+  actions.appendChild(copy);
+
+  const runnable = [
+    "html","htm","javascript","js","css"
+  ].includes(language);
+
+  if(runnable){
+
+    const run = document.createElement("button");
+    run.className = "code-btn run";
+    run.textContent = "▶ اجرا";
+
+    run.onclick = ()=>runCode(language,code);
+
+    actions.appendChild(run);
+  }
+
+  head.append(lang,actions);
+
+  const pre = document.createElement("pre");
+  const codeEl = document.createElement("code");
+  codeEl.textContent = code;
+
+  pre.appendChild(codeEl);
+  box.append(head,pre);
+  parent.appendChild(box);
+}
+
+// ======================================
+// LOCAL CODE EXECUTION
+// ======================================
+
+function runCode(language,code){
+
+  let html = "";
+
+  if(language === "html" || language === "htm"){
+    html = code;
+  }
+
+  else if(language === "css"){
+    html = `
+      <!DOCTYPE html>
+      <html>
+      <head><style>${code}</style></head>
+      <body><h3>CSS Preview</h3><p>کد CSS اجرا شد.</p></body>
+      </html>
+    `;
+  }
+
+  else if(language === "javascript" || language === "js"){
+
+    html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body{font-family:Arial;padding:20px;color:#222}
+          pre{background:#eee;padding:12px;white-space:pre-wrap}
+        </style>
+      </head>
+      <body>
+        <h3>JavaScript Preview</h3>
+        <pre id="output">در حال اجرا...</pre>
+        <script>
+          const output = document.getElementById("output");
+          const oldLog = console.log;
+          console.log = (...args)=>{
+            output.textContent += "\\n" + args.join(" ");
+            oldLog(...args);
+          };
+
+          try{
+            output.textContent = "اجرا شد.\\n";
+            ${code}
+          }catch(error){
+            output.textContent += "\\nخطا: " + error.message;
+          }
+        <\/script>
+      </body>
+      </html>
+    `;
+  }
+
+  previewFrame.srcdoc = html;
+  previewOverlay.classList.add("active");
+}
+
+// ======================================
+// SCROLL
+// ======================================
+
+function scrollToBottom(){
+  requestAnimationFrame(()=>{
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
+}
+
+inputEl.focus();
+</script>
+</body>
+</html>
